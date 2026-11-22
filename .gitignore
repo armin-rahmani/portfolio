@@ -24,10 +24,8 @@ dist-ssr
 *.sln
 *.sw?
 
-# Temporary test screenshots and zip
-*.png
-!public/**/*.png
-!src/**/*.png
+# Root temporary test screenshots and zip files
+/*.png
 *.zip
 *.cjs
 *.py
