@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { PROJECTS, CLIENT_LOGOS, Project } from '../data/sidejobData';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -9,6 +10,7 @@ import { useShowcaseModal } from '../context/ShowcaseModalContext';
 gsap.registerPlugin(ScrollTrigger);
 
 export const WorkSection: React.FC = () => {
+  const navigate = useNavigate();
   const [activeCardIndex, setActiveCardIndex] = useState(0);
   const containerRef = useRef<HTMLDivElement>(null);
   const stageRef = useRef<HTMLDivElement>(null);
@@ -270,7 +272,7 @@ export const WorkSection: React.FC = () => {
                 onClick={() => {
                   if (isCenter) {
                     if (proj.liveUrl) {
-                      window.location.href = proj.liveUrl;
+                      navigate(proj.liveUrl);
                     } else {
                       openShowcase(proj);
                     }
@@ -402,8 +404,9 @@ export const WorkSection: React.FC = () => {
 
           {/* Live Demo or Live Site Capsule Button */}
           {PROJECTS[activeCardIndex].liveUrl ? (
-            <a
-              href={PROJECTS[activeCardIndex].liveUrl}
+            <button
+              type="button"
+              onClick={() => navigate(PROJECTS[activeCardIndex].liveUrl!)}
               className="px-3.5 py-2 sm:px-5 sm:py-2.5 rounded-full border border-emerald-400/40 hover:border-emerald-300 bg-emerald-500/20 hover:bg-emerald-400 text-emerald-100 hover:text-black text-xs sm:text-sm font-semibold backdrop-blur-xl flex items-center gap-1.5 cursor-pointer transition-all duration-300 active:scale-95 will-change-transform group shadow-md"
               aria-label={`Open Full ${PROJECTS[activeCardIndex].title}`}
               data-cursor-text="VISIT"
@@ -416,7 +419,7 @@ export const WorkSection: React.FC = () => {
                   : 'Open Live Site'}
               </span>
               <span className="text-[10px] sm:text-xs transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5">↗</span>
-            </a>
+            </button>
           ) : (
             <button
               type="button"

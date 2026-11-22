@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
-    "predeploy": "pnpm build && cp dist/index.html dist/404.html",
+    "predeploy": "pnpm build && cp dist/index.html dist/404.html && mkdir -p dist/celestique dist/sohub && cp dist/index.html dist/celestique/index.html && cp dist/index.html dist/sohub/index.html",
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {

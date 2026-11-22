@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect, useId } from 'react';
+import { useNavigate } from 'react-router-dom';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { useShowcaseModal } from '../context/ShowcaseModalContext';
@@ -128,6 +129,7 @@ export const ShowcaseModal: React.FC = () => {
 
         {/* Interactive Experience Viewport */}
         <div className="flex-1 w-full relative overflow-hidden bg-black/60 flex flex-col">
+          {current.id === 'celestique' && <CelestiqueShowcaseExperience />}
           {current.id === 'sohub' && <SohubShowcaseExperience />}
           {current.id === 'spatial' && <SpatialVisionExperience />}
           {current.id === 'kinetic' && <KineticTypographyExperience />}
@@ -151,9 +153,56 @@ export const ShowcaseModal: React.FC = () => {
 };
 
 /* =========================================================================
-   0. SHOWCASE: Raya Studio Live Experience (Designed & Developed by Armin Rahmani)
+   0A. SHOWCASE: Celestique Haute Joaillerie (Designed & Developed by Armin Rahmani)
+   ========================================================================= */
+const CelestiqueShowcaseExperience: React.FC = () => {
+  const navigate = useNavigate();
+  const baseUrl = import.meta.env.BASE_URL ? import.meta.env.BASE_URL.replace(/\/$/, '') : '';
+  const celestiqueUrl = `${baseUrl}/celestique`;
+
+  return (
+    <div className="relative flex-1 w-full h-full flex flex-col bg-[#F7F4EE] text-[#1C1917] overflow-hidden font-tenor">
+      {/* Top Experience Control Bar */}
+      <div className="flex items-center justify-between px-5 py-3 bg-[#EAE4D9] border-b border-[#1C1917]/10 z-10">
+        <div className="flex items-center gap-3">
+          <span className="w-2.5 h-2.5 rounded-full bg-[#D4AF37] animate-pulse" />
+          <span className="font-bold text-xs sm:text-sm text-[#1C1917] tracking-widest uppercase">
+            CELESTIQUE — Haute Joaillerie
+          </span>
+          <span className="text-[11px] text-[#1C1917]/60 hidden md:inline">
+            • Designed & Engineered by Armin Rahmani
+          </span>
+        </div>
+        <button
+          type="button"
+          onClick={() => navigate('/celestique')}
+          className="px-4 py-1.5 rounded-full bg-[#1C1917] hover:bg-[#D4AF37] text-white hover:text-black text-xs font-semibold transition-all flex items-center gap-1.5 shadow-sm active:scale-95 cursor-pointer"
+        >
+          <span>Open Full Experience</span>
+          <span className="text-[10px]">↗</span>
+        </button>
+      </div>
+
+      {/* Embedded Live Interactive Experience */}
+      <div className="relative flex-1 w-full h-full overflow-hidden bg-[#F7F4EE]">
+        <iframe
+          src={celestiqueUrl}
+          title="Celestique Haute Joaillerie Live Website"
+          className="w-full h-full border-0"
+        />
+      </div>
+    </div>
+  );
+};
+
+/* =========================================================================
+   0B. SHOWCASE: Raya Studio Live Experience (Designed & Developed by Armin Rahmani)
    ========================================================================= */
 const SohubShowcaseExperience: React.FC = () => {
+  const navigate = useNavigate();
+  const baseUrl = import.meta.env.BASE_URL ? import.meta.env.BASE_URL.replace(/\/$/, '') : '';
+  const sohubUrl = `${baseUrl}/sohub`;
+
   return (
     <div className="relative flex-1 w-full h-full flex flex-col bg-[#FBFBFB] text-[#0C1016] overflow-hidden font-vazir" dir="rtl">
       {/* Top Experience Control Bar */}
@@ -167,19 +216,20 @@ const SohubShowcaseExperience: React.FC = () => {
             • طراحی و پیاده‌سازی کامل توسط آرمین رحمانی
           </span>
         </div>
-        <a
-          href="/sohub"
-          className="px-4 py-1.5 rounded-full bg-black hover:bg-black/85 text-white text-xs font-semibold transition-all flex items-center gap-1.5 shadow-sm active:scale-95"
+        <button
+          type="button"
+          onClick={() => navigate('/sohub')}
+          className="px-4 py-1.5 rounded-full bg-black hover:bg-black/85 text-white text-xs font-semibold transition-all flex items-center gap-1.5 shadow-sm active:scale-95 cursor-pointer"
         >
           <span>مشاهده وبسایت تمام‌صفحه</span>
           <span className="text-[10px]">↗</span>
-        </a>
+        </button>
       </div>
 
       {/* Embedded Live Interactive Experience */}
       <div className="relative flex-1 w-full h-full overflow-hidden bg-[#FBFBFB]">
         <iframe
-          src="/sohub"
+          src={sohubUrl}
           title="Raya Studio Live Website"
           className="w-full h-full border-0"
         />
