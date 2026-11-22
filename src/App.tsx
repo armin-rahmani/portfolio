@@ -145,9 +145,11 @@ const AppContent: React.FC = () => {
   );
 };
 
+const basename = import.meta.env.BASE_URL ? import.meta.env.BASE_URL.replace(/\/$/, '') : '';
+
 export function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={basename}>
       <PlayerProvider>
         <TransitionProvider>
           <ContactModalProvider>
